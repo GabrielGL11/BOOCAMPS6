@@ -1,0 +1,45 @@
+{% extends 'pagina_usuario/base.html' %}
+
+{% block content %}
+<h2>Perfiles Registrados</h2>
+
+<a href="{% url 'perfil_create' %}" class="button mb-3">Crear Nuevo Perfil</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Nacionalidad</th>
+            <th>Acciones</th> 
+        </tr>
+    </thead>
+    <tbody>
+        {% for perfil in perfiles %}
+        <tr>
+            <td>{{ perfil.nombres }}</td>
+            <td>{{ perfil.apellidos }}</td>
+            <td>{{ perfil.nacionalidad }}</td>
+            
+            <td class="acciones">
+                <a href="{% url 'perfil_detail' perfil.pk %}" class="button">Ver</a>
+                
+                <a href="{% url 'perfil_update' perfil.pk %}" class="button">Editar</a>
+
+                <form action="{% url 'perfil_delete' perfil.pk %}" method="post" class="inline-form">
+                    {% csrf_token %}
+                    <button type="submit" class="button"
+                            onclick="return confirm('¿Eliminar perfil?')">
+                        Eliminar
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No hay perfiles registrados.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

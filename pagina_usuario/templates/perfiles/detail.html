@@ -1,0 +1,207 @@
+{% extends 'pagina_usuario/base.html' %}
+
+{% block content %}
+
+<div style="text-align: center; margin-bottom: 20px;">
+    <a href="{% url 'descargar_perfil' perfil.pk %}" target="_blank" class="button button-exito">
+        Descargar perfil en PDF
+    </a>
+</div>
+
+<h2>{{ perfil.nombres }} {{ perfil.apellidos }}</h2>
+
+{% if perfil.imagenperfil %}
+    <div style="text-align: center; margin-bottom: 20px;">
+        <img src="{{ perfil.imagenperfil.url }}" class="imagen-perfil">
+    </div>
+{% else %}
+    <p><em>No hay imagen de perfil</em></p>
+{% endif %}
+
+<hr>
+
+<h3>Datos Personales</h3>
+<ul>
+    <li><strong>Descripción:</strong> {{ perfil.descripcionperfil }}</li>
+    <li><strong>Estado:</strong> {{ perfil.get_perfilactivo_display }}</li>
+    <li><strong>Nacionalidad:</strong> {{ perfil.nacionalidad }}</li>
+    <li><strong>Lugar de nacimiento:</strong> {{ perfil.lugarnacimiento }}</li>
+    <li><strong>Fecha de nacimiento:</strong> {{ perfil.fechanacimiento }}</li>
+    <li><strong>Cédula:</strong> {{ perfil.numerocedula }}</li>
+    <li><strong>Sexo:</strong> {{ perfil.get_sexo_display }}</li>
+    <li><strong>Estado civil:</strong> {{ perfil.estadocivil }}</li>
+    <li><strong>Dirección:</strong> {{ perfil.direcciondomiciliaria }}</li>
+</ul>
+
+<hr>
+
+<h3>Experiencia Laboral</h3>
+<div class="acciones">
+    <a href="{% url 'experiencia_create' perfil.pk %}" class="button">Agregar</a>
+</div>
+<ul>
+{% for e in experiencias %}
+    <li>
+        <strong>{{ e.cargodesempenado }}</strong> – {{ e.nombrempresa }}<br>
+        Lugar: {{ e.lugarempresa }}<br>
+        Fechas: {{ e.fechainiciogestion }} - {{ e.fechafingestion|default:"Actual" }}<br>
+        Funciones: {{ e.descripcionfunciones }}<br>
+
+        {% if e.rutacertificado %}
+            {% with e.rutacertificado.url|lower as archivo %}
+                {% if ".jpg" in archivo or ".png" in archivo or ".jpeg" in archivo %}
+                    <img src="{{ e.rutacertificado.url }}" class="imagen-certificado">
+                {% else %}
+                    <a href="{{ e.rutacertificado.url }}" target="_blank" class="link-archivo">Ver certificado</a>
+                {% endif %}
+            {% endwith %}
+        {% endif %}
+
+        <div class="acciones">
+            <a href="{% url 'experiencia_update' e.pk %}" class="button">Editar</a>
+            <a href="{% url 'experiencia_delete' e.pk %}" class="button button-secundario"
+            onclick="return confirm('¿Eliminar experiencia?')">Eliminar</a>
+        </div>
+    </li>
+{% empty %}
+    <li>No hay experiencia registrada</li>
+{% endfor %}
+</ul>
+
+<hr>
+
+<h3>Reconocimientos</h3>
+<div class="acciones">
+    <a href="{% url 'reconocimiento_create' perfil.pk %}" class="button">Agregar</a>
+</div>
+<ul>
+{% for r in reconocimientos %}
+    <li>
+        <strong>{{ r.tiporeconocimiento }}</strong> – {{ r.descripcionreconocimiento }}<br>
+        Entidad: {{ r.entidadpatrocinadora }}<br>
+        Fecha: {{ r.fechareconocimiento }}<br>
+
+        {% if r.rutacertificado %}
+            {% with r.rutacertificado.url|lower as archivo %}
+                {% if ".jpg" in archivo or ".png" in archivo or ".jpeg" in archivo %}
+                    <img src="{{ r.rutacertificado.url }}" class="imagen-certificado">
+                {% else %}
+                    <a href="{{ r.rutacertificado.url }}" target="_blank" class="link-archivo">Ver certificado</a>
+                {% endif %}
+            {% endwith %}
+        {% endif %}
+
+        <div class="acciones">
+            <a href="{% url 'reconocimiento_update' r.pk %}" class="button">Editar</a>
+            <a href="{% url 'reconocimiento_delete' r.pk %}" class="button button-secundario"
+            onclick="return confirm('¿Eliminar reconocimiento?')">Eliminar</a>
+        </div>
+    </li>
+{% empty %}
+    <li>No hay reconocimientos</li>
+{% endfor %}
+</ul>
+
+<hr>
+
+<h3>Cursos Realizados</h3>
+<div class="acciones">
+    <a href="{% url 'curso_create' perfil.pk %}" class="button">Agregar</a>
+</div>
+<ul>
+{% for c in cursos %}
+    <li>
+        <strong>{{ c.nombrecurso }}</strong> – {{ c.totalhoras }} horas<br>
+
+        {% if c.rutacertificado %}
+            {% with c.rutacertificado.url|lower as archivo %}
+                {% if ".jpg" in archivo or ".png" in archivo or ".jpeg" in archivo %}
+                    <img src="{{ c.rutacertificado.url }}" class="imagen-certificado">
+                {% else %}
+                    <a href="{{ c.rutacertificado.url }}" target="_blank" class="link-archivo">Ver certificado</a>
+                {% endif %}
+            {% endwith %}
+        {% endif %}
+
+        <div class="acciones">
+            <a href="{% url 'curso_update' c.pk %}" class="button">Editar</a>
+            <a href="{% url 'curso_delete' c.pk %}" class="button button-secundario"
+            onclick="return confirm('¿Eliminar curso?')">Eliminar</a>
+        </div>
+    </li>
+{% empty %}
+    <li>No hay cursos</li>
+{% endfor %}
+</ul>
+
+<hr>
+
+<h3>Productos Académicos</h3>
+<div class="acciones">
+    <a href="{% url 'producto_academico_create' perfil.pk %}" class="button">Agregar</a>
+</div>
+<ul>
+{% for p in productos_academicos %}
+    <li>
+        <strong>{{ p.nombrerecurso }}</strong> – {{ p.clasificador }}<br>
+        {{ p.descripcion }}<br>
+
+        <div class="acciones">
+            <a href="{% url 'producto_academico_update' p.pk %}" class="button">Editar</a>
+            <a href="{% url 'producto_academico_delete' p.pk %}" class="button button-secundario"
+            onclick="return confirm('¿Eliminar producto académico?')">Eliminar</a>
+        </div>
+    </li>
+{% empty %}
+    <li>No hay productos académicos</li>
+{% endfor %}
+</ul>
+
+<hr>
+
+<h3>Productos Laborales</h3>
+<div class="acciones">
+    <a href="{% url 'producto_laboral_create' perfil.pk %}" class="button">Agregar</a>
+</div>
+<ul>
+{% for p in productos_laborales %}
+    <li>
+        <strong>{{ p.nombreproducto }}</strong> – {{ p.fechaproducto }}<br>
+        {{ p.descripcion }}<br>
+
+        <div class="acciones">
+            <a href="{% url 'producto_laboral_update' p.pk %}" class="button">Editar</a>
+            <a href="{% url 'producto_laboral_delete' p.pk %}" class="button button-secundario"
+            onclick="return confirm('¿Eliminar producto laboral?')">Eliminar</a>
+        </div>
+    </li>
+{% empty %}
+    <li>No hay productos laborales</li>
+{% endfor %}
+</ul>
+
+<hr>
+
+<h3>Venta Garage</h3>
+<div class="acciones">
+    <a href="{% url 'venta_create' perfil.pk %}" class="button">Agregar</a>
+</div>
+<ul>
+{% for v in ventas %}
+    <li>
+        <strong>{{ v.nombreproducto }}</strong> – {{ v.estadoproducto }}<br>
+        Valor: ${{ v.valordelbien }}<br>
+        {{ v.descripcion }}<br>
+
+        <div class="acciones">
+            <a href="{% url 'venta_update' v.pk %}" class="button">Editar</a>
+            <a href="{% url 'venta_delete' v.pk %}" class="button button-secundario"
+            onclick="return confirm('¿Eliminar producto de venta?')">Eliminar</a>
+        </div>
+    </li>
+{% empty %}
+    <li>No hay productos en venta</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

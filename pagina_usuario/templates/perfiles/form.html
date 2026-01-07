@@ -1,0 +1,14 @@
+{% extends 'pagina_usuario/base.html' %}
+
+{% block content %}
+<h2>{% if form.instance.pk %}Editar Perfil{% else %}Crear Nuevo Perfil{% endif %}</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <br>
+    <input type="submit" value="{% if form.instance.pk %}Actualizar{% else %}Crear{% endif %}">
+</form>
+{% endblock %}

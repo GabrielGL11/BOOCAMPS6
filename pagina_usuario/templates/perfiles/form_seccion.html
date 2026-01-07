@@ -1,0 +1,35 @@
+{% extends 'pagina_usuario/base.html' %}
+
+{% block content %}
+<h2>
+    {% if form.instance.pk %}
+        Editar Registro
+    {% else %}
+        Agregar Registro
+    {% endif %}
+    - {{ perfil.nombres }} {{ perfil.apellidos }}
+</h2>
+
+<form method="post" enctype="multipart/form-data"> {# obligatorio para archivos #}
+    {% csrf_token %}
+
+    <table>
+        {{ form.as_table }}
+    </table>
+
+    {# Mostrar archivo existente si lo hay #}
+    {% if form.instance.rutacertificado %}
+        <p>
+            Certificado actual: 
+            <a href="{{ form.instance.rutacertificado.url }}" target="_blank">
+                {{ form.instance.rutacertificado.name|slice:"10:" }}
+            </a>
+        </p>
+    {% endif %}
+
+    <br>
+    <input type="submit" value="{% if form.instance.pk %}Actualizar{% else %}Agregar{% endif %}">
+</form>
+
+<a href="{% url 'perfil_detail' perfil.pk %}" class="button">Volver al Perfil</a>
+{% endblock %}

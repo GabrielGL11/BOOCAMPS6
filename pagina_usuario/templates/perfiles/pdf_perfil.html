@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ perfil.nombres }} {{ perfil.apellidos }}</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        h3 {
+            background: #f0f0f0;
+            padding: 5px;
+            margin-top: 20px;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>{{ perfil.nombres }} {{ perfil.apellidos }}</h2>
+
+
+<h3>Datos Personales</h3>
+<ul>
+    <li><strong>Descripción:</strong> {{ perfil.descripcionperfil }}</li>
+    <li><strong>Estado:</strong> {{ perfil.get_perfilactivo_display }}</li>
+    <li><strong>Nacionalidad:</strong> {{ perfil.nacionalidad }}</li>
+    <li><strong>Lugar de nacimiento:</strong> {{ perfil.lugarnacimiento }}</li>
+    <li><strong>Fecha de nacimiento:</strong> {{ perfil.fechanacimiento }}</li>
+    <li><strong>Cédula:</strong> {{ perfil.numerocedula }}</li>
+    <li><strong>Sexo:</strong> {{ perfil.get_sexo_display }}</li>
+    <li><strong>Estado civil:</strong> {{ perfil.estadocivil }}</li>
+
+    {% if perfil.licenciaconducir %}
+        <li><strong>Licencia de conducir:</strong> {{ perfil.licenciaconducir }}</li>
+    {% endif %}
+
+    {% if perfil.telefonoconvencional %}
+        <li><strong>Teléfono convencional:</strong> {{ perfil.telefonoconvencional }}</li>
+    {% endif %}
+
+    {% if perfil.telefonofijo %}
+        <li><strong>Teléfono fijo:</strong> {{ perfil.telefonofijo }}</li>
+    {% endif %}
+
+    {% if perfil.direcciontrabajo %}
+        <li><strong>Dirección de trabajo:</strong> {{ perfil.direcciontrabajo }}</li>
+    {% endif %}
+
+    <li><strong>Dirección domiciliaria:</strong> {{ perfil.direcciondomiciliaria }}</li>
+</ul>
+
+{% if experiencias %}
+<h3>Experiencia Laboral</h3>
+<ul>
+{% for e in experiencias %}
+    <li>
+        <strong>{{ e.cargodesempenado }}</strong> – {{ e.nombrempresa }}<br>
+        <strong>Lugar:</strong> {{ e.lugarempresa }}<br>
+        <strong>Contacto:</strong> {{ e.nombrecontactoempresarial }} – {{ e.telefonocontactoempresarial }}<br>
+        <strong>Fechas:</strong> {{ e.fechainiciogestion }} - {{ e.fechafingestion|default:"Actual" }}<br>
+        <strong>Funciones:</strong> {{ e.descripcionfunciones }}
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if reconocimientos %}
+<h3>Reconocimientos</h3>
+<ul>
+{% for r in reconocimientos %}
+    <li>
+        <strong>{{ r.tiporeconocimiento }}</strong><br>
+        {{ r.descripcionreconocimiento }}<br>
+        <strong>Entidad:</strong> {{ r.entidadpatrocinadora }}<br>
+        <strong>Contacto:</strong> {{ r.nombrecontactoauspicia }} – {{ r.telefonocontactoauspicia }}<br>
+        <strong>Fecha:</strong> {{ r.fechareconocimiento }}
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if cursos %}
+<h3>Cursos Realizados</h3>
+<ul>
+{% for c in cursos %}
+    <li>
+        <strong>{{ c.nombrecurso }}</strong> – {{ c.totalhoras }} horas<br>
+        <strong>Fechas:</strong> {{ c.fechainicio }} - {{ c.fechafin }}<br>
+        <strong>Entidad:</strong> {{ c.entidadpatrocinadora }}<br>
+        <strong>Descripción:</strong> {{ c.descripcioncurso }}
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if productos_academicos %}
+<h3>Productos Académicos</h3>
+<ul>
+{% for p in productos_academicos %}
+    <li>
+        <strong>{{ p.nombrerecurso }}</strong><br>
+        <strong>Clasificación:</strong> {{ p.clasificador }}<br>
+        {{ p.descripcion }}
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if productos_laborales %}
+<h3>Productos Laborales</h3>
+<ul>
+{% for p in productos_laborales %}
+    <li>
+        <strong>{{ p.nombreproducto }}</strong><br>
+        <strong>Fecha:</strong> {{ p.fechaproducto }}<br>
+        {{ p.descripcion }}
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% if ventas %}
+<h3>Venta Garage</h3>
+<ul>
+{% for v in ventas %}
+    <li>
+        <strong>{{ v.nombreproducto }}</strong><br>
+        <strong>Estado:</strong> {{ v.estadoproducto }}<br>
+        {{ v.descripcion }}<br>
+        <strong>Precio:</strong> ${{ v.valordelbien }}
+    </li>
+{% endfor %}
+</ul>
+{% endif %}
+
+</body>
+</html>

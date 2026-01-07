@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Hojas de Vida</title>
+
+    <link rel="stylesheet" href="{% static 'pagina_usuario/css/estilos.css' %}">
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>Gestión de Hojas de Vida</h1>
+        <nav>
+            <a href="{% url 'perfil_list' %}">Inicio</a>
+            <a href="{% url 'perfil_create' %}">Crear Hoja de Vida</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    <p>© 2026 Sistema de Hojas de Vida - Boocamps</p>
+</footer>
+
+</body>
+</html>
