@@ -141,3 +141,15 @@ cloudinary.config(
 )
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+if os.environ.get("RENDER") == "true":
+    try:
+        from django.contrib.auth.models import User
+        if not User.objects.filter(username="admin").exists():
+            User.objects.create_superuser(
+                "GabrielGL",
+                "gabrielguaman1105@gmail.com",
+                "aGGl1105."
+            )
+    except Exception:
+        pass
