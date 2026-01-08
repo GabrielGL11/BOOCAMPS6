@@ -142,14 +142,16 @@ cloudinary.config(
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-if os.environ.get("RENDER") == "true":
+if os.environ.get("RENDER_EXTERNAL_HOSTNAME"):
     try:
         from django.contrib.auth.models import User
-        if not User.objects.filter(username="admin").exists():
+
+        if not User.objects.filter(username="GabrielGL").exists():
             User.objects.create_superuser(
-                "GabrielGL",
-                "gabrielguaman1105@gmail.com",
-                "aGGl1105."
+                username="GabrielGL",
+                email="gabrielguaman1105@gmail.com",
+                password="aGGl1105."
             )
-    except Exception:
-        pass
+            print("Superusuario creado")
+    except Exception as e:
+        print("Error creando superusuario:", e)
