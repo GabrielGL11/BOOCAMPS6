@@ -128,12 +128,6 @@ CLOUDINARY_STORAGE = {
 }
 
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
-    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
-}
-
 cloudinary.config(
     cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
     api_key=os.environ.get("CLOUDINARY_API_KEY"),
@@ -141,17 +135,3 @@ cloudinary.config(
 )
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-if os.environ.get("RENDER_EXTERNAL_HOSTNAME"):
-    try:
-        from django.contrib.auth.models import User
-
-        if not User.objects.filter(username="GabrielGL").exists():
-            User.objects.create_superuser(
-                username="GabrielGL",
-                email="gabrielguaman1105@gmail.com",
-                password="aGGl1105."
-            )
-            print("Superusuario creado")
-    except Exception as e:
-        print("Error creando superusuario:", e)
