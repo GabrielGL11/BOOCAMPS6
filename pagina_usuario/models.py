@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 
 class DatosPersonales(models.Model):
@@ -12,10 +13,10 @@ class DatosPersonales(models.Model):
         ('M', 'Mujer'),
     ]
 
-    imagenperfil = models.ImageField(
-        upload_to='perfiles/',
-        blank=True,
-        null=True
+    imagenperfil = CloudinaryField(
+        'imagenperfil',
+        null=True,
+        blank=True
     )
 
     descripcionperfil = models.TextField()
@@ -55,12 +56,13 @@ class ExperienciaLaboral(models.Model):
     fechafingestion = models.DateField(blank=True, null=True)
     descripcionfunciones = models.TextField()
     activarparaqueseveaenfront = models.BooleanField(default=True)
-    rutacertificado = models.FileField(
-    upload_to='certificados/',
-    blank=True,
-    null=True
-)
 
+    rutacertificado = CloudinaryField(
+        'rutacertificado',
+        resource_type='raw',
+        null=True,
+        blank=True
+    )
 
     class Meta:
         db_table = "EXPERIENCIALABORAL"
@@ -84,12 +86,13 @@ class Reconocimientos(models.Model):
     nombrecontactoauspicia = models.CharField(max_length=100)
     telefonocontactoauspicia = models.CharField(max_length=60)
     activarparaqueseveaenfront = models.BooleanField(default=True)
-    rutacertificado = models.FileField(
-    upload_to='certificados/',
-    blank=True,
-    null=True
-)
 
+    rutacertificado = CloudinaryField(
+        'rutacertificado',
+        resource_type='raw',
+        null=True,
+        blank=True
+    )
 
     class Meta:
         db_table = "RECONOCIMIENTOS"
@@ -110,12 +113,13 @@ class CursosRealizados(models.Model):
     telefonocontactoauspicia = models.CharField(max_length=60)
     emailempresapatrocinadora = models.EmailField(max_length=60, blank=True, null=True)
     activarparaqueseveaenfront = models.BooleanField(default=True)
-    rutacertificado = models.FileField(
-    upload_to='certificados/',
-    blank=True,
-    null=True
-)
 
+    rutacertificado = CloudinaryField(
+        'rutacertificado',
+        resource_type='raw',
+        null=True,
+        blank=True
+    )
 
     class Meta:
         db_table = "CURSOSREALIZADOS"
