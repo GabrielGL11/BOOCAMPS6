@@ -48,8 +48,8 @@
         Funciones: {{ e.descripcionfunciones }}<br>
 
         {% if e.rutacertificado %}
-            <a href="{{ e.rutacertificado.url|add:'?dl=1' }}" class="link-archivo">
-                Ver / Descargar certificado
+            <a href="{{ e.rutacertificado.url }}" download class="link-archivo">
+                Descargar certificado
             </a>
         {% endif %}
 
@@ -78,8 +78,8 @@
         Fecha: {{ r.fechareconocimiento }}<br>
 
         {% if r.rutacertificado %}
-            <a href="{{ r.rutacertificado.url|add:'?dl=1' }}" class="link-archivo">
-                Ver / Descargar certificado
+            <a href="{{ r.rutacertificado.url }}" download class="link-archivo">
+                Descargar certificado
             </a>
         {% endif %}
 
@@ -106,8 +106,8 @@
         <strong>{{ c.nombrecurso }}</strong> – {{ c.totalhoras }} horas<br>
 
         {% if c.rutacertificado %}
-            <a href="{{ c.rutacertificado.url|add:'?dl=1' }}" class="link-archivo">
-                Ver / Descargar certificado
+            <a href="{{ c.rutacertificado.url }}" download class="link-archivo">
+                Descargar certificado
             </a>
         {% endif %}
 
