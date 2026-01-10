@@ -48,7 +48,9 @@
         Funciones: {{ e.descripcionfunciones }}<br>
 
         {% if e.rutacertificado %}
-            <a href="{{ e.rutacertificado.url }}" download class="link-archivo">
+            <a href="{{ e.rutacertificado.url }}?dl=1"
+                target="_blank"
+                class="link-archivo">
                 Descargar certificado
             </a>
         {% endif %}
@@ -78,7 +80,9 @@
         Fecha: {{ r.fechareconocimiento }}<br>
 
         {% if r.rutacertificado %}
-            <a href="{{ r.rutacertificado.url }}" download class="link-archivo">
+            <a href="{{ r.rutacertificado.url }}?dl=1"
+                target="_blank"
+                class="link-archivo">
                 Descargar certificado
             </a>
         {% endif %}
@@ -105,11 +109,15 @@
     <li>
         <strong>{{ c.nombrecurso }}</strong> – {{ c.totalhoras }} horas<br>
 
+
         {% if c.rutacertificado %}
-            <a href="{{ c.rutacertificado.url }}" download class="link-archivo">
+            <a href="{{ c.rutacertificado.url }}?dl=1"
+                target="_blank"
+                class="link-archivo">
                 Descargar certificado
             </a>
         {% endif %}
+
 
         <div class="acciones">
             <a href="{% url 'curso_update' c.pk %}" class="button">Editar</a>
