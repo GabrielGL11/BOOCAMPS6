@@ -6,39 +6,72 @@
     <title>{{ perfil.nombres }} {{ perfil.apellidos }}</title>
 
     <style>
+        /* ===== ESTILO BASE (NO CAMBIA CONTENIDO) ===== */
         body {
             font-family: Arial, sans-serif;
             font-size: 12px;
+            color: #212529;
         }
+
         h2 {
             text-align: center;
             margin-bottom: 10px;
+            font-size: 18px;
         }
+
         h3 {
             background: #f0f0f0;
-            padding: 5px;
+            padding: 6px;
             margin-top: 20px;
+            font-size: 14px;
         }
+
         ul {
             list-style: none;
             padding-left: 0;
         }
+
         li {
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #e0e0e0;
         }
-        img {
-            max-width: 450px;
+
+        strong {
+            color: #002147;
+        }
+
+        /* ===== CONTROL DE IMÁGENES (CAMBIO REAL) ===== */
+
+        /* FOTO PERFIL */
+        .foto-perfil {
+            width: 4cm;
+            height: 5cm;
+            object-fit: cover;
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            display: block;
+            margin: 0 auto 10px auto;
+        }
+
+        /* CERTIFICADOS */
+        .img-certificado {
+            width: 14cm;
+            height: 9cm;
+            object-fit: contain;
+            border: 1px solid #ccc;
             margin-top: 6px;
         }
     </style>
 </head>
+
 <body>
 
 <h2>{{ perfil.nombres }} {{ perfil.apellidos }}</h2>
 
 {% if perfil.imagenperfil %}
     <div style="text-align:center; margin-bottom:10px;">
-        <img src="{{ perfil.imagenperfil.url }}" alt="Imagen de perfil">
+        <img src="{{ perfil.imagenperfil.url }}" class="foto-perfil" alt="Imagen de perfil">
     </div>
 {% endif %}
 
@@ -85,7 +118,7 @@
 
         {% if e.rutacertificado %}
             <br>
-            <img src="{{ e.rutacertificado.url }}" alt="Certificado experiencia">
+            <img src="{{ e.rutacertificado.url }}" class="img-certificado" alt="Certificado experiencia">
         {% endif %}
     </li>
 {% endfor %}
@@ -105,7 +138,7 @@
 
         {% if r.rutacertificado %}
             <br>
-            <img src="{{ r.rutacertificado.url }}" alt="Certificado reconocimiento">
+            <img src="{{ r.rutacertificado.url }}" class="img-certificado" alt="Certificado reconocimiento">
         {% endif %}
     </li>
 {% endfor %}
@@ -124,7 +157,7 @@
 
         {% if c.rutacertificado %}
             <br>
-            <img src="{{ c.rutacertificado.url }}" alt="Certificado curso">
+            <img src="{{ c.rutacertificado.url }}" class="img-certificado" alt="Certificado curso">
         {% endif %}
     </li>
 {% endfor %}
