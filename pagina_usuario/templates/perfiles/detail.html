@@ -48,7 +48,7 @@
         Funciones: {{ e.descripcionfunciones }}<br>
 
         {% if e.rutacertificado %}
-            <a href="{{ e.rutacertificado.url }}?dl=1"
+            <a href="{{ e.rutacertificado.url }}"
                 target="_blank"
                 class="link-archivo">
                 Descargar certificado
@@ -80,7 +80,7 @@
         Fecha: {{ r.fechareconocimiento }}<br>
 
         {% if r.rutacertificado %}
-            <a href="{{ r.rutacertificado.url }}?dl=1"
+            <a href="{{ r.rutacertificado.url }}"
                 target="_blank"
                 class="link-archivo">
                 Descargar certificado
@@ -111,7 +111,7 @@
 
 
         {% if c.rutacertificado %}
-            <a href="{{ c.rutacertificado.url }}?dl=1"
+            <a href="{{ c.rutacertificado.url }}"
                 target="_blank"
                 class="link-archivo">
                 Descargar certificado
