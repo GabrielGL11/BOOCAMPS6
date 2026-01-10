@@ -59,7 +59,6 @@ class ExperienciaLaboral(models.Model):
 
     rutacertificado = CloudinaryField(
         'rutacertificado',
-        resource_type='raw',
         null=True,
         blank=True
     )
@@ -89,7 +88,6 @@ class Reconocimientos(models.Model):
 
     rutacertificado = CloudinaryField(
         'rutacertificado',
-        resource_type='raw',
         null=True,
         blank=True
     )
@@ -116,7 +114,6 @@ class CursosRealizados(models.Model):
 
     rutacertificado = CloudinaryField(
         'rutacertificado',
-        resource_type='raw',
         null=True,
         blank=True
     )
