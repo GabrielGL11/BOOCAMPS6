@@ -48,13 +48,9 @@
         Funciones: {{ e.descripcionfunciones }}<br>
 
         {% if e.rutacertificado %}
-            {% with e.rutacertificado.url|lower as archivo %}
-                {% if ".jpg" in archivo or ".png" in archivo or ".jpeg" in archivo %}
-                    <img src="{{ e.rutacertificado.url }}" class="imagen-certificado">
-                {% else %}
-                    <a href="{{ e.rutacertificado.url }}" target="_blank" class="link-archivo">Ver certificado</a>
-                {% endif %}
-            {% endwith %}
+            <a href="{{ e.rutacertificado.url }}" target="_blank" class="link-archivo">
+                Ver / Descargar certificado
+            </a>
         {% endif %}
 
         <div class="acciones">
@@ -82,13 +78,9 @@
         Fecha: {{ r.fechareconocimiento }}<br>
 
         {% if r.rutacertificado %}
-            {% with r.rutacertificado.url|lower as archivo %}
-                {% if ".jpg" in archivo or ".png" in archivo or ".jpeg" in archivo %}
-                    <img src="{{ r.rutacertificado.url }}" class="imagen-certificado">
-                {% else %}
-                    <a href="{{ r.rutacertificado.url }}" target="_blank" class="link-archivo">Ver certificado</a>
-                {% endif %}
-            {% endwith %}
+            <a href="{{ r.rutacertificado.url }}" target="_blank" class="link-archivo">
+                Ver / Descargar certificado
+            </a>
         {% endif %}
 
         <div class="acciones">
@@ -114,13 +106,9 @@
         <strong>{{ c.nombrecurso }}</strong> – {{ c.totalhoras }} horas<br>
 
         {% if c.rutacertificado %}
-            {% with c.rutacertificado.url|lower as archivo %}
-                {% if ".jpg" in archivo or ".png" in archivo or ".jpeg" in archivo %}
-                    <img src="{{ c.rutacertificado.url }}" class="imagen-certificado">
-                {% else %}
-                    <a href="{{ c.rutacertificado.url }}" target="_blank" class="link-archivo">Ver certificado</a>
-                {% endif %}
-            {% endwith %}
+            <a href="{{ c.rutacertificado.url }}" target="_blank" class="link-archivo">
+                📄 Ver / Descargar certificado
+            </a>
         {% endif %}
 
         <div class="acciones">
