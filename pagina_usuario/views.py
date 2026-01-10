@@ -3,6 +3,8 @@ from django.views import View
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 
+from weasyprint import HTML
+
 from .models import (
     DatosPersonales,
     ExperienciaLaboral,
@@ -148,14 +150,14 @@ def eliminar_seccion(request, pk, model_class=None):
 
 def descargar_perfil(request, pk):
     """
-    Descarga del perfil.
-    ✔ Compatible con Render
-    ✔ SIN wkhtmltopdf
-    ✔ SIN error 500
+    Descarga del perfil en PDF
+    ✔ WeasyPrint
+    ✔ Render OK
+    ✔ Cloudinary OK
     """
     perfil = get_object_or_404(DatosPersonales, pk=pk)
 
-    html = render_to_string(
+    html_string = render_to_string(
         'perfiles/pdf_perfil.html',
         {
             'perfil': perfil,
@@ -180,8 +182,14 @@ def descargar_perfil(request, pk):
         }
     )
 
-    response = HttpResponse(html, content_type='text/html')
+    response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = (
-        f'inline; filename="{perfil.nombres}_{perfil.apellidos}.html"'
+        f'inline; filename="{perfil.nombres}_{perfil.apellidos}.pdf"'
     )
+
+    HTML(
+        string=html_string,
+        base_url=request.build_absolute_uri('/')
+    ).write_pdf(response)
+
     return response

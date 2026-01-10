@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,12 +26,21 @@
         li {
             margin-bottom: 6px;
         }
+        img {
+            max-width: 450px;
+            margin-top: 6px;
+        }
     </style>
 </head>
 <body>
 
 <h2>{{ perfil.nombres }} {{ perfil.apellidos }}</h2>
 
+{% if perfil.imagenperfil %}
+    <div style="text-align:center; margin-bottom:10px;">
+        <img src="{{ perfil.imagenperfil.url }}" alt="Imagen de perfil">
+    </div>
+{% endif %}
 
 <h3>Datos Personales</h3>
 <ul>
@@ -72,6 +82,11 @@
         <strong>Contacto:</strong> {{ e.nombrecontactoempresarial }} – {{ e.telefonocontactoempresarial }}<br>
         <strong>Fechas:</strong> {{ e.fechainiciogestion }} - {{ e.fechafingestion|default:"Actual" }}<br>
         <strong>Funciones:</strong> {{ e.descripcionfunciones }}
+
+        {% if e.rutacertificado %}
+            <br>
+            <img src="{{ e.rutacertificado.url }}" alt="Certificado experiencia">
+        {% endif %}
     </li>
 {% endfor %}
 </ul>
@@ -87,6 +102,11 @@
         <strong>Entidad:</strong> {{ r.entidadpatrocinadora }}<br>
         <strong>Contacto:</strong> {{ r.nombrecontactoauspicia }} – {{ r.telefonocontactoauspicia }}<br>
         <strong>Fecha:</strong> {{ r.fechareconocimiento }}
+
+        {% if r.rutacertificado %}
+            <br>
+            <img src="{{ r.rutacertificado.url }}" alt="Certificado reconocimiento">
+        {% endif %}
     </li>
 {% endfor %}
 </ul>
@@ -101,6 +121,11 @@
         <strong>Fechas:</strong> {{ c.fechainicio }} - {{ c.fechafin }}<br>
         <strong>Entidad:</strong> {{ c.entidadpatrocinadora }}<br>
         <strong>Descripción:</strong> {{ c.descripcioncurso }}
+
+        {% if c.rutacertificado %}
+            <br>
+            <img src="{{ c.rutacertificado.url }}" alt="Certificado curso">
+        {% endif %}
     </li>
 {% endfor %}
 </ul>
